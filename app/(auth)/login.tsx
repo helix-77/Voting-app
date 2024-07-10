@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Alert, StyleSheet, View, AppState, TextInput, Button, Text } from "react-native";
 import { supabase } from "@/lib/supabase";
-import { Stack } from "expo-router";
+import { Redirect, router, Stack } from "expo-router";
+import { SearchBar } from "@rneui/themed";
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -29,6 +30,8 @@ export default function Auth() {
 
     if (error) Alert.alert(error.message);
     setLoading(false);
+    // redirect to profile
+    router.replace("/profile");
   }
 
   async function signUpWithEmail() {
@@ -58,6 +61,7 @@ export default function Auth() {
               onChangeText={(text) => setEmail(text)}
               value={email}
               placeholder="email@address.com"
+              placeholderTextColor={"#9CA3AF"}
               autoCapitalize={"none"}
             />
           </View>
@@ -70,15 +74,18 @@ export default function Auth() {
               value={password}
               secureTextEntry={true}
               placeholder="Password"
+              placeholderTextColor={"#9CA3AF"}
               autoCapitalize={"none"}
             />
           </View>
           <View>
             <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
           </View>
-          <View className="flex flex-row items-center justify-center text-gray-200">
+          <View className="mt-2 flex flex-row items-center justify-center text-gray-200">
             <Text className="text-gray-200">Don't have an account? </Text>
-            <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+            <View className="w-[10vh]">
+              <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+            </View>
           </View>
         </View>
       </View>

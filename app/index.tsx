@@ -1,8 +1,9 @@
 import { Link, router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { Alert, FlatList, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { Alert, FlatList, Text, TouchableOpacity, View } from "react-native";
 import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import { supabase } from "@/lib/supabase";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function App() {
   const [polls, setPolls] = useState([]);
@@ -20,7 +21,8 @@ export default function App() {
     <>
       <SafeAreaView className="bg-gray-800 h-full">
         <View className="flex flex-row items-center justify-between mx-2">
-          <Link href={"/login"} className="mt-0.5">
+          {/* later change to profile/account dynamicaly */}
+          <Link href={"/profile"} className="mt-0.5">
             <MaterialIcons name="account-circle" size={26} color="white" />
           </Link>
           <Text className="text-white text-2xl font-bold text-center p-4">Polls</Text>

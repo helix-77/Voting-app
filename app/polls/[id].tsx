@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView, Pressable, Button } from "react-native";
+import { View, Text, Pressable, Button } from "react-native";
 import React, { useState } from "react";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { Feather } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const poll = {
   question: "What is your favorite color?",
@@ -20,9 +21,9 @@ const PollScreen = () => {
   return (
     <>
       <Stack.Screen options={{ headerShown: true, title: "Poll - " + id }} />
-      <SafeAreaView>
-        <View className="mx-4 my-4">
-          <Text className="text-xl font-bold mb-1">{poll.question}</Text>
+      <View className="h-full bg-gray-800">
+        <View className="mx-4 my-4 ">
+          <Text className="text-xl font-black mb-1 text-gray-200">{poll.question}</Text>
           {poll.options.map((option) => (
             <Pressable
               onPress={() => setSelected(option)}
@@ -32,14 +33,16 @@ const PollScreen = () => {
               <Feather
                 name={option === selected ? "check-circle" : "circle"}
                 size={24}
-                color={option === selected ? "green" : "black"}
+                color={option === selected ? "green" : "gray"}
               />
-              <Text>{option}</Text>
+              <Text className="text-white">{option}</Text>
             </Pressable>
           ))}
         </View>
-        <Button title="Vote" onPress={handleVote} />
-      </SafeAreaView>
+        <View className="h-[10vh] w-[12vh] mx-4 ">
+          <Button title="Vote" onPress={handleVote} />
+        </View>
+      </View>
     </>
   );
 };
