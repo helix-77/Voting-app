@@ -4,9 +4,10 @@ import { Alert, FlatList, Text, TouchableOpacity, View } from "react-native";
 import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import { supabase } from "@/lib/supabase";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { PollType } from "@/types/db";
 
 export default function App() {
-  const [polls, setPolls] = useState([]);
+  const [polls, setPolls] = useState<PollType[]>([]);
 
   useEffect(() => {
     const fetchPolls = async () => {
@@ -41,7 +42,7 @@ export default function App() {
               onPress={() => router.push(`polls/${item.id}`)}
               className="bg-gray-700 rounded-lg  my-2 mx-2 py-2 px-2 "
             >
-              <Text className="text-white text-xl p-2 ">Question - {item.id}</Text>
+              <Text className="text-white text-xl p-2 ">{item.question}</Text>
             </TouchableOpacity>
           )}
         />

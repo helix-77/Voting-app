@@ -6,6 +6,8 @@ export default function RootLayout() {
     <AuthProvider>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(protected)" options={{ title: "Account" }} />
+        <Stack.Screen name="polls/createPoll" options={{ title: "Create Poll" }} />
       </Stack>
     </AuthProvider>
   );

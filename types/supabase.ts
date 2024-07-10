@@ -13,8 +13,8 @@ export type Database = {
         Row: {
           created_at: string
           id: number
-          Options: string[]
-          Question: string
+          options: string[]
+          question: string
         }
         Insert: {
           created_at?: string

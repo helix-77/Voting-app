@@ -9,7 +9,6 @@ const Profile = () => {
 
   return (
     <>
-      <Stack.Screen options={{ title: "Account" }} />
       <View className="bg-gray-800 h-full">
         <View className="mx-4 my-4 ">
           <Text className=" text-gray-200">User id: {user?.email}</Text>
