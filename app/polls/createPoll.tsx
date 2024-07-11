@@ -41,7 +41,8 @@ const CreatePoll = () => {
       console.log(error);
       return;
     }
-    router.push("./index");
+
+    // router.push("./index");
   };
 
   return (
