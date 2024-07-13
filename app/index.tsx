@@ -5,6 +5,7 @@ import { Entypo, MaterialIcons } from "@expo/vector-icons";
 import { supabase } from "@/lib/supabase";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PollType } from "@/types/db";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
   const [polls, setPolls] = useState<PollType[]>([]);

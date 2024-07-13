@@ -106,7 +106,17 @@ const PollScreen = () => {
 
   return (
     <>
-      <Stack.Screen options={{ headerShown: true, title: "Poll - " + id }} />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          title: "Poll - " + id,
+          headerStyle: {
+            backgroundColor: "#1f2937",
+          },
+          headerTintColor: "#ffffff",
+          headerShadowVisible: false,
+        }}
+      />
       <View className="h-full bg-gray-800">
         <View className="mx-4 my-4 ">
           <Text className="text-xl font-black mb-1 text-gray-200">{poll.question}</Text>

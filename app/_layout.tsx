@@ -9,6 +9,7 @@ export default function RootLayout() {
         <Stack.Screen
           name="(protected)"
           options={{
+            headerShown: true,
             title: "Account",
             headerStyle: {
               backgroundColor: "#1f2937",

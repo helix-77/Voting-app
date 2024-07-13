@@ -13,10 +13,6 @@ const CreatePoll = () => {
 
   const { user } = useAuth();
 
-  // if (!user) {
-  //   return <Redirect href="/login" />;
-  // }
-
   const handleCreatePoll = async () => {
     setQuesErrorText("");
     setOptionErrorText("");
@@ -34,7 +30,7 @@ const CreatePoll = () => {
 
     const { data, error } = await supabase
       .from("polls")
-      .insert([{ question, options: validOptions }])
+      .insert([{ question, options: validOptions, creator_id: user?.id }])
       .select();
     if (error) {
       Alert.alert("Please login to create a poll.");

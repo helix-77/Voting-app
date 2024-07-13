@@ -12,23 +12,34 @@ export type Database = {
       polls: {
         Row: {
           created_at: string
+          creator_id: string
           id: number
           options: string[]
           question: string
         }
         Insert: {
           created_at?: string
+          creator_id: string
           id?: number
           options: string[]
           question: string
         }
         Update: {
           created_at?: string
+          creator_id?: string
           id?: number
           options?: string[]
           question?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "polls_creator_id_fkey"
+            columns: ["creator_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       votes: {
         Row: {
