@@ -1,6 +1,6 @@
 import { View, Text, TextInput, Button, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
-import { Redirect, router, Stack } from "expo-router";
+import { Link, Redirect, router, Stack } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useAuth } from "@/providers/AuthProvider";
 import { supabase } from "@/lib/supabase";
@@ -34,15 +34,15 @@ const CreatePoll = () => {
 
     const { data, error } = await supabase
       .from("polls")
-      .insert([{ question, options: validOptions }]) // Changed 'Options' to 'options'
+      .insert([{ question, options: validOptions }])
       .select();
     if (error) {
       Alert.alert("Please login to create a poll.");
       console.log(error);
       return;
     }
-
-    // router.push("./index");
+    // Navigate to the index page upon successful poll creation
+    router.replace("/");
   };
 
   return (
@@ -63,35 +63,36 @@ const CreatePoll = () => {
           <View>
             <Text className="font-semibold text-base text-white">Options</Text>
             {options.map((option, index) => (
-              <>
-                <View className="flex flex-row items-center mr-6 space-x-1">
-                  <TextInput
-                    key={index}
-                    className="text-white font-semibold px-2 py-2 border border-gray-400 rounded-lg w-full mt-2"
-                    value={option}
-                    placeholder={`Option ${index + 1}`}
-                    placeholderTextColor="#7b7b8b"
-                    onChangeText={(option) => {
-                      const newOptionArray = [...options];
-                      newOptionArray[index] = option;
-                      setOptions(newOptionArray);
-                    }}
-                  />
-                  <TouchableOpacity
-                    className="mt-2"
-                    onPress={() => setOptions(options.slice(0, -1))}
-                  >
-                    <MaterialIcons name="delete-forever" size={26} color="lightgray" />
-                  </TouchableOpacity>
-                </View>
-              </>
+              <View key={index} className="flex flex-row items-center mr-6 space-x-1">
+                <TextInput
+                  className="text-white font-semibold px-2 py-2 border border-gray-400 rounded-lg w-full mt-2"
+                  value={option}
+                  placeholder={`Option ${index + 1}`}
+                  placeholderTextColor="#7b7b8b"
+                  onChangeText={(option) => {
+                    const newOptionArray = [...options];
+                    newOptionArray[index] = option;
+                    setOptions(newOptionArray);
+                  }}
+                />
+                <TouchableOpacity
+                  className="mt-2"
+                  onPress={() => {
+                    const newOptionArray = [...options];
+                    newOptionArray.splice(index, 1);
+                    setOptions(newOptionArray);
+                  }}
+                >
+                  <MaterialIcons name="delete-forever" size={26} color="lightgray" />
+                </TouchableOpacity>
+              </View>
             ))}
           </View>
           <Text className="font-light text-sm text-red-700 mt-1">{optionErrorText}</Text>
-          <View className="mt-1">
+          <View className="my-1 ">
             <Button title="Add Option" onPress={() => setOptions([...options, ""])} />
-            <Button title="Create Poll" onPress={handleCreatePoll} />
           </View>
+          <Button title="Create Poll" onPress={handleCreatePoll} />
         </View>
       </View>
     </>

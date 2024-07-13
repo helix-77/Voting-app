@@ -1,6 +1,6 @@
 import { View, Text, Pressable, Button, Alert, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { router, Stack, useLocalSearchParams } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 import { supabase } from "@/lib/supabase";
 import { PollType, VoteType } from "@/types/db";
@@ -27,7 +27,9 @@ const PollScreen = () => {
     };
 
     const fetchUserVote = async () => {
-      if (!user) return;
+      if (!user) {
+        return;
+      }
       //else
       let { data, error } = await supabase
         .from("votes")
@@ -38,6 +40,9 @@ const PollScreen = () => {
         .single();
       if (data) {
         setSelected(data.option);
+      }
+      if (error) {
+        console.log(error.message);
       }
     };
 
@@ -51,6 +56,10 @@ const PollScreen = () => {
   }
 
   const handleVote = async () => {
+    if (!user) {
+      Alert.alert("Unsuccessful", "Please Login to vote");
+      return;
+    }
     // Check if the vote already exists
     const { data: existingVote, error: fetchError } = await supabase
       .from("votes")
@@ -91,6 +100,8 @@ const PollScreen = () => {
     } else {
       Alert.alert("Successful", `You voted ${selected}`);
     }
+
+    router.replace("/");
   };
 
   return (
@@ -100,10 +111,10 @@ const PollScreen = () => {
         <View className="mx-4 my-4 ">
           <Text className="text-xl font-black mb-1 text-gray-200">{poll.question}</Text>
           {poll.options.map((option) => (
-            <View className="">
+            <View key={option}>
               <Pressable
+                //  key={option}
                 onPress={() => setSelected(option)}
-                key={option}
                 className="flex flex-row gap-2 items-center mx-1 my-2 px-2 pb-2 bg-slate-700 rounded-lg"
               >
                 <Feather
