@@ -1,4 +1,12 @@
-import { View, Text, Pressable, Button, Alert, ActivityIndicator } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  Button,
+  Alert,
+  ActivityIndicator,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { Feather } from "@expo/vector-icons";
@@ -137,9 +145,12 @@ const PollScreen = () => {
             </View>
           ))}
         </View>
-        <View className="mx-4 ">
-          <Button title="Vote" onPress={handleVote} />
-        </View>
+        <TouchableOpacity
+          className="bg-gray-700 rounded-lg px-4 py-2 mt-2 mx-20"
+          onPress={handleVote}
+        >
+          <Text className="text-white font-semibold text-center">Vote</Text>
+        </TouchableOpacity>
       </View>
     </>
   );

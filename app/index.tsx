@@ -41,9 +41,9 @@ export default function App() {
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => router.push(`polls/${item.id}`)}
-              className="bg-gray-700 rounded-lg my-2 mx-2 py-2 px-2"
+              className="bg-gray-700 rounded-lg my-2 mx-3 py-1 px-2"
             >
-              <Text className="text-white text-xl p-2">{item.question}</Text>
+              <Text className="text-white text-base p-2">{item.question}</Text>
             </TouchableOpacity>
           )}
           keyExtractor={(item) => item.id.toString()}
