@@ -22,21 +22,27 @@ const CreatePoll = () => {
       return;
     }
 
-    const validOptions = options.filter((option) => option.trim() !== "");
-    if (validOptions.length < 2) {
+    const validOptions = options.filter((option) => option.trim() !== ""); // Remove empty options
+
+    const uniqueOptions = Array.from(new Set(validOptions)); // Remove duplicate options
+
+    if (uniqueOptions.length < 2) {
       setOptionErrorText("At least 2 valid options are required");
       return;
     }
 
+    // Insert the poll into the database
     const { data, error } = await supabase
       .from("polls")
-      .insert([{ question, options: validOptions, creator_id: user?.id }])
+      .insert([{ question, options: uniqueOptions, creator_id: user?.id }])
       .select();
+
     if (error) {
       Alert.alert("Please login to create a poll.");
       console.log(error);
       return;
     }
+
     // Navigate to the index page upon successful poll creation
     router.replace("/");
   };
@@ -85,10 +91,20 @@ const CreatePoll = () => {
             ))}
           </View>
           <Text className="font-light text-sm text-red-700 mt-1">{optionErrorText}</Text>
-          <View className="my-1 ">
-            <Button title="Add Option" onPress={() => setOptions([...options, ""])} />
+          <View className="mt-1 mb-4 ">
+            <TouchableOpacity
+              className="bg-gray-700 rounded-lg px-4 py-2 mt-2 mx-20"
+              onPress={() => setOptions([...options, ""])}
+            >
+              <Text className="text-white font-semibold text-center">Add Option</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={handleCreatePoll}
+              className="bg-gray-700 rounded-lg px-4 py-2 mt-2 mx-20"
+            >
+              <Text className="text-white font-semibold text-center">Create Poll</Text>
+            </TouchableOpacity>
           </View>
-          <Button title="Create Poll" onPress={handleCreatePoll} />
         </View>
       </View>
     </>

@@ -21,6 +21,7 @@ export default function Auth() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // sign in
   async function signInWithEmail() {
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
@@ -34,6 +35,7 @@ export default function Auth() {
     router.replace("/profile");
   }
 
+  // sign up
   async function signUpWithEmail() {
     setLoading(true);
     const {
@@ -51,7 +53,17 @@ export default function Auth() {
 
   return (
     <>
-      <Stack.Screen options={{ title: "Account" }} />
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          title: "Account",
+          headerStyle: {
+            backgroundColor: "#1f2937",
+          },
+          headerTintColor: "#ffffff", // Ensure text is visible against the dark background
+          headerShadowVisible: false, // Remove the bottom border on the header
+        }}
+      />
       <View className="bg-gray-800 h-full">
         <View className="mx-4 my-4 ">
           <View>
