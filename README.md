@@ -1,7 +1,10 @@
 Used Expo and supabase 
 
-# Get started
+# To run the app
+Simply install the apk from the [release](https://github.com/helix-77/Voting-app/releases) page.
+Or you can run it on Expo Go
 
+For that,
 1. Install dependencies
 
    ```bash
