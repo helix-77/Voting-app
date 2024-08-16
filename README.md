@@ -1,10 +1,9 @@
-Used Expo and supabase 
+Used Expo, supabase and nativewind v2
 
 # To run the app
 Simply install the apk from the [release](https://github.com/helix-77/Voting-app/releases) page.
-Or you can run it on Expo Go
 
-For that,
+Or, you can run it on Expo Go
 1. Install dependencies
 
    ```bash
