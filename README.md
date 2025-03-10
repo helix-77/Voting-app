@@ -1,7 +1,14 @@
-Used Expo, supabase and nativewind v2
+# Voting App
+The Voting App is a mobile application developed to explore and master React Native, Expo, Supabase, and NativeWind. It allows users to create, participate in, and manage polls in real-time. Leveraging Supabase for backend functionality, the app ensures seamless data synchronization and user authentication. Styled with NativeWind for a responsive and modern UI, this project serves as a hands-on learning experience in building scalable, cross-platform mobile applications with cutting-edge technologies.
+
+## Tech-stack
+- React Native
+- Expo
+- Supabase
+- Nativewind
 
 # To run the app
-Simply install the apk from the [release](https://github.com/helix-77/Voting-app/releases) page.
+Simply install the apk from the [release](https://github.com/helix-77/Voting-app/releases) page. (update: Backend database has been disabled to save cost, released apk won't work anymore.)
 
 Or, you can run it on Expo Go
 1. Install dependencies
